@@ -8,6 +8,9 @@ function initScenario2() {
 
   const btnPlay = sec.querySelector('.btn-play');
   const btnReset = sec.querySelector('.btn-reset');
+  const btnFloatingPlay = sec.querySelector('.btn-floating-play');
+  const btnFloatingReset = sec.querySelector('.btn-floating-reset');
+
   const varButtons = sec.querySelectorAll('.btn-var');
   const car = sec.querySelector('#s2-car');
   const lid = sec.querySelector('#s2-ladle-lid');
@@ -39,10 +42,20 @@ function initScenario2() {
     });
   });
 
+  function clearAllTimeouts() {
+    animationTimeouts.forEach(t => clearTimeout(t));
+    animationTimeouts = [];
+  }
+
   function play() {
     if (isRunning) return;
     isRunning = true;
+    clearAllTimeouts();
     btnPlay.classList.add('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.add('playing');
+      btnFloatingPlay.textContent = '⏸ Executando...';
+    }
     progress.start();
 
     // Carro sai do Convertedor 2 descendo pelos trilhos da Ala Norte
@@ -81,14 +94,22 @@ function initScenario2() {
 
     animationTimeouts.push(setTimeout(() => {
       btnPlay.classList.remove('playing');
+      if (btnFloatingPlay) {
+        btnFloatingPlay.classList.remove('playing');
+        btnFloatingPlay.textContent = '▶ Simular';
+      }
     }, 3000));
   }
 
   function reset() {
     isRunning = false;
-    animationTimeouts.forEach(t => clearTimeout(t));
+    clearAllTimeouts();
     progress.reset();
     btnPlay.classList.remove('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.remove('playing');
+      btnFloatingPlay.textContent = '▶ Simular';
+    }
 
     car.style.transition = 'none';
     car.style.transform = 'translate(105px, 90px)';
@@ -109,4 +130,6 @@ function initScenario2() {
 
   btnPlay.addEventListener('click', play);
   btnReset.addEventListener('click', reset);
+  if (btnFloatingPlay) btnFloatingPlay.addEventListener('click', play);
+  if (btnFloatingReset) btnFloatingReset.addEventListener('click', reset);
 }

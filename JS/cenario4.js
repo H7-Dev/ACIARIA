@@ -9,6 +9,9 @@ function initScenario4() {
 
   const btnPlay = sec.querySelector('.btn-play');
   const btnReset = sec.querySelector('.btn-reset');
+  const btnFloatingPlay = sec.querySelector('.btn-floating-play');
+  const btnFloatingReset = sec.querySelector('.btn-floating-reset');
+
   const varButtons = sec.querySelectorAll('.btn-var');
   const crane = sec.querySelector('#s4-crane');
   const liquidSteel = sec.querySelector('#s4-liquid-steel');
@@ -52,6 +55,10 @@ function initScenario4() {
     isRunning = true;
     clearAllTimeouts();
     btnPlay.classList.add('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.add('playing');
+      btnFloatingPlay.textContent = '⏸ Executando...';
+    }
     progress.start();
 
     // 1. Ponte com panela içada translada no EIXO X da Ala Sul (direita, X=620px) até a Ala Norte (esquerda, X=100px)
@@ -97,6 +104,10 @@ function initScenario4() {
       statusBadge.className = 'live-alert-badge warning';
       statusBadge.querySelector('.alert-text-status').textContent = '✅ CARGA TRANSITADA PARA ALA NORTE | H0 EM SEGURANÇA';
       btnPlay.classList.remove('playing');
+      if (btnFloatingPlay) {
+        btnFloatingPlay.classList.remove('playing');
+        btnFloatingPlay.textContent = '▶ Simular';
+      }
     }, 3800));
   }
 
@@ -105,6 +116,10 @@ function initScenario4() {
     clearAllTimeouts();
     progress.reset();
     btnPlay.classList.remove('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.remove('playing');
+      btnFloatingPlay.textContent = '▶ Simular';
+    }
 
     crane.style.transition = 'none';
     crane.style.transform = 'translateX(620px)';
@@ -125,4 +140,6 @@ function initScenario4() {
 
   btnPlay.addEventListener('click', play);
   btnReset.addEventListener('click', reset);
+  if (btnFloatingPlay) btnFloatingPlay.addEventListener('click', play);
+  if (btnFloatingReset) btnFloatingReset.addEventListener('click', reset);
 }

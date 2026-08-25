@@ -8,6 +8,9 @@ function initScenario1() {
 
   const btnPlay = sec.querySelector('.btn-play');
   const btnReset = sec.querySelector('.btn-reset');
+  const btnFloatingPlay = sec.querySelector('.btn-floating-play');
+  const btnFloatingReset = sec.querySelector('.btn-floating-reset');
+
   const varButtons = sec.querySelectorAll('.btn-var');
   const car = sec.querySelector('#s1-car');
   const lid = sec.querySelector('#s1-ladle-lid');
@@ -49,6 +52,10 @@ function initScenario1() {
     isRunning = true;
     clearAllTimeouts();
     btnPlay.classList.add('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.add('playing');
+      btnFloatingPlay.textContent = '⏸ Executando...';
+    }
     progress.start();
 
     // 1. Carro inicia movimento suave subindo pelo trilho Sul
@@ -87,6 +94,10 @@ function initScenario1() {
       statusBadge.className = 'live-alert-badge warning';
       statusBadge.querySelector('.alert-text-status').textContent = '✅ H3 EVACUADO NO REFÚGIO | H1 E H2 SEGUROS';
       btnPlay.classList.remove('playing');
+      if (btnFloatingPlay) {
+        btnFloatingPlay.classList.remove('playing');
+        btnFloatingPlay.textContent = '▶ Simular';
+      }
     }, 3500));
   }
 
@@ -95,6 +106,10 @@ function initScenario1() {
     clearAllTimeouts();
     progress.reset();
     btnPlay.classList.remove('playing');
+    if (btnFloatingPlay) {
+      btnFloatingPlay.classList.remove('playing');
+      btnFloatingPlay.textContent = '▶ Simular';
+    }
 
     car.style.transition = 'none';
     car.style.transform = 'translate(550px, 520px)';
@@ -123,4 +138,6 @@ function initScenario1() {
 
   btnPlay.addEventListener('click', play);
   btnReset.addEventListener('click', reset);
+  if (btnFloatingPlay) btnFloatingPlay.addEventListener('click', play);
+  if (btnFloatingReset) btnFloatingReset.addEventListener('click', reset);
 }
