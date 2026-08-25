@@ -268,7 +268,7 @@
           </div>
         </div>
 
-        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Notas -->
+        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Painel de Cenários -->
         <div class="col-right">
           <div class="panel-header">
             <h3>📋 Matriz de Segurança</h3>
@@ -279,26 +279,12 @@
           <div class="notes-tab-bar">
             <button class="tab-item active" data-tab="default">Default</button>
             <div class="custom-tabs-container"></div>
-            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+            <button class="btn-add-tab" title="Adicionar Novo Cenário / Variação">➕</button>
           </div>
 
-          <!-- Form to Add New Note -->
-          <div class="note-form-card">
-            <div class="form-title">
-              <span>📝 Nova Nota / Cenário</span>
-              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
-            </div>
-            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
-            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
-            <div class="form-actions">
-              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
-              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
-            </div>
-          </div>
-
-          <!-- Dynamic Content Container -->
+          <!-- Dynamic Content Container (Panels) -->
           <div class="notes-content-container">
-            <div class="default-content">
+            <div class="panel-view default-panel">
               <div class="rule-card">
                 <div class="rule-title">🛡️ Regra Operacional Aplicada</div>
                 <ul>
@@ -317,14 +303,14 @@
                   <li>Risco restrito ao atropelamento e proximidade de carga mecânica na faixa lateral H3.</li>
                 </ul>
               </div>
-            </div>
-          </div>
 
-          <div class="safety-alert-footer">
-            <div class="alert-icon">⚠️</div>
-            <div class="alert-text">
-              <strong>Atenção ao Rádio Operacional:</strong>
-              Operador do carro emite sinal sonoro antes do deslocamento. H3 deve estar 100% livre.
+              <div class="safety-alert-footer">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-text">
+                  <strong>Atenção ao Rádio Operacional:</strong>
+                  Operador do carro emite sinal sonoro antes do deslocamento. H3 deve estar 100% livre.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -491,7 +477,7 @@
           </div>
         </div>
 
-        <!-- COLUNA 3 (RIGHT) -->
+        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Painel de Cenários -->
         <div class="col-right">
           <div class="panel-header">
             <h3>📋 Matriz de Segurança</h3>
@@ -502,26 +488,12 @@
           <div class="notes-tab-bar">
             <button class="tab-item active" data-tab="default">Default</button>
             <div class="custom-tabs-container"></div>
-            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+            <button class="btn-add-tab" title="Adicionar Novo Cenário / Variação">➕</button>
           </div>
 
-          <!-- Form to Add New Note -->
-          <div class="note-form-card">
-            <div class="form-title">
-              <span>📝 Nova Nota / Cenário</span>
-              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
-            </div>
-            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
-            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
-            <div class="form-actions">
-              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
-              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
-            </div>
-          </div>
-
-          <!-- Dynamic Content Container -->
+          <!-- Dynamic Content Container (Panels) -->
           <div class="notes-content-container">
-            <div class="default-content">
+            <div class="panel-view default-panel">
               <div class="rule-card">
                 <div class="rule-title">🚨 Protocolo Crítico de Segurança</div>
                 <ul>
@@ -540,14 +512,14 @@
                   <li>Com tampa ou sem tampa, a regra é <strong>evacuação total incondicional</strong>.</li>
                 </ul>
               </div>
-            </div>
-          </div>
 
-          <div class="safety-alert-footer">
-            <div class="alert-icon">🔥</div>
-            <div class="alert-text">
-              <strong>Alarme Sonoro Contínuo:</strong>
-              Acionamento de sirene da Aciaria antes da abertura das portas do convertedor e movimentação do carro.
+              <div class="safety-alert-footer">
+                <div class="alert-icon">🔥</div>
+                <div class="alert-text">
+                  <strong>Alarme Sonoro Contínuo:</strong>
+                  Acionamento de sirene da Aciaria antes da abertura das portas do convertedor e movimentação do carro.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -612,9 +584,9 @@
                 <text x="75" y="78" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle">2</text>
               </g>
 
-              <!-- Trilhos das Pontes (Vigas de Rolamento Laterais) -->
-              <line x1="15" y1="0" x2="15" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
-              <line x1="685" y1="0" x2="685" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <!-- Trilhos das Pontes (Vigas de Rolamento Longitudinais Superior e Inferior) -->
+              <line x1="0" y1="20" x2="700" y2="20" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <line x1="0" y1="565" x2="700" y2="565" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
 
               <!-- ÁREA H0 -->
               <g transform="translate(195, 150)">
@@ -652,20 +624,19 @@
                 <g id="s3-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
               </g>
 
-              <!-- PONTE ROLANTE (PR08/PR09) - VAZIA -->
-              <g id="s3-crane" transform="translate(0, 40)">
-                <!-- Vigas Principais da Ponte -->
-                <rect x="15" y="0" width="670" height="18" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
-                <rect x="15" y="26" width="670" height="18" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
-                <text x="590" y="14" fill="#fff" font-size="11" font-weight="800" font-family="sans-serif">PR08 / PR09</text>
+              <!-- PONTE ROLANTE (PR08/PR09) - VAZIA COM MOVIMENTO NO EIXO X -->
+              <g id="s3-crane" transform="translate(600, 0)">
+                <!-- Vigas da Ponte Rolante -->
+                <rect x="-10" y="15" width="18" height="555" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <rect x="14" y="15" width="18" height="555" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <text x="11" y="550" fill="#fff" font-size="10" font-weight="800" font-family="sans-serif" transform="rotate(-90 11, 550)">PR08 / PR09</text>
 
-                <!-- Carro Guincho / Trolley Móvel -->
-                <g id="s3-crane-trolley" transform="translate(350, 6)">
-                  <rect x="-30" y="-2" width="60" height="36" class="crane-trolley" rx="4" />
-                  <!-- Gancho Principal -->
-                  <circle cx="0" cy="16" r="10" class="crane-hook" />
-                  <path d="M-4,16 L4,16 L0,26 Z" fill="#b45309" />
-                  <text x="0" y="-6" fill="#0369a1" font-size="8" font-weight="800" text-anchor="middle">GANCHO</text>
+                <!-- Carro Guincho / Trole Móvel com Gancho Alinhado ao Norte (H1) -->
+                <g id="s3-crane-trolley" transform="translate(11, 175)">
+                  <rect x="-24" y="-20" width="48" height="40" class="crane-trolley" rx="4" />
+                  <circle cx="0" cy="0" r="12" class="crane-hook" />
+                  <path d="M-4,0 L4,0 L0,10 Z" fill="#b45309" />
+                  <text x="0" y="-25" fill="#38bdf8" font-size="9" font-weight="800" text-anchor="middle">GANCHO (H1)</text>
                 </g>
               </g>
 
@@ -691,7 +662,7 @@
           </div>
         </div>
 
-        <!-- COLUNA 3 (RIGHT) -->
+        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Painel de Cenários -->
         <div class="col-right">
           <div class="panel-header">
             <h3>📋 Matriz de Segurança</h3>
@@ -702,26 +673,12 @@
           <div class="notes-tab-bar">
             <button class="tab-item active" data-tab="default">Default</button>
             <div class="custom-tabs-container"></div>
-            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+            <button class="btn-add-tab" title="Adicionar Novo Cenário / Variação">➕</button>
           </div>
 
-          <!-- Form to Add New Note -->
-          <div class="note-form-card">
-            <div class="form-title">
-              <span>📝 Nova Nota / Cenário</span>
-              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
-            </div>
-            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
-            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
-            <div class="form-actions">
-              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
-              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
-            </div>
-          </div>
-
-          <!-- Dynamic Content Container -->
+          <!-- Dynamic Content Container (Panels) -->
           <div class="notes-content-container">
-            <div class="default-content">
+            <div class="panel-view default-panel">
               <div class="rule-card">
                 <div class="rule-title">🛡️ Regra da Ponte Rolante Vazia</div>
                 <ul>
@@ -740,14 +697,14 @@
                   <li>A frente <strong>H3</strong> fica fora do cone de perigo do gancho recolhido.</li>
                 </ul>
               </div>
-            </div>
-          </div>
 
-          <div class="safety-alert-footer">
-            <div class="alert-icon">🏗️</div>
-            <div class="alert-text">
-              <strong>Checklist de Manobra Aérea:</strong>
-              Operador da ponte confirma alinhamento do gancho ao extremo Norte antes de liberar o cruzamento sobre H0.
+              <div class="safety-alert-footer">
+                <div class="alert-icon">🏗️</div>
+                <div class="alert-text">
+                  <strong>Checklist de Manobra Aérea:</strong>
+                  Operador da ponte confirma alinhamento do gancho ao extremo Norte antes de liberar o cruzamento sobre H0.
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -763,10 +720,10 @@
         
         <!-- COLUNA 1 (LEFT) -->
         <div class="col-left">
-          <div class="tag-badge crane">Movimentação Aérea (Ponte Rolante)</div>
+          <div class="tag-badge crane">Movimentação Aérea (Carga Suspensa)</div>
           <h2 class="scenario-title">Cenário 4: Ponte Rolante com Carga</h2>
           <p class="scenario-desc">
-            Ponte rolante <strong>PR08 ou PR09 transportando panela suspensa (cheia ou vazia)</strong> cruzando o espaço aéreo de H0 entre a Ala Norte e a Ala Sul.
+            Transporte aéreo de panela de aço (<strong>cheia ou vazia</strong>) cruzando o vão livre sobre a Área H0.
           </p>
 
           <div class="control-group">
@@ -826,9 +783,9 @@
                 <text x="75" y="78" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle">2</text>
               </g>
 
-              <!-- Trilhos das Pontes -->
-              <line x1="15" y1="0" x2="15" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
-              <line x1="685" y1="0" x2="685" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <!-- Trilhos das Pontes (Vigas de Rolamento Longitudinais Superior e Inferior) -->
+              <line x1="0" y1="20" x2="700" y2="20" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <line x1="0" y1="565" x2="700" y2="565" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
 
               <!-- ÁREA H0 -->
               <g transform="translate(195, 150)">
@@ -866,27 +823,23 @@
                 <g id="s4-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
               </g>
 
-              <!-- PONTE ROLANTE (PR08/PR09) COM PANELA SUSPENSA -->
-              <g id="s4-crane" transform="translate(0, 30)">
+              <!-- PONTE ROLANTE (PR08/PR09) COM PANELA SUSPENSA - MOVIMENTO NO EIXO X -->
+              <g id="s4-crane" transform="translate(620, 0)">
                 <!-- Vigas da Ponte -->
-                <rect x="15" y="0" width="670" height="20" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
-                <rect x="15" y="30" width="670" height="20" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
-                <text x="590" y="15" fill="#fff" font-size="11" font-weight="800" font-family="sans-serif">PR08 / PR09</text>
+                <rect x="-12" y="15" width="22" height="555" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <rect x="18" y="15" width="22" height="555" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <text x="14" y="550" fill="#fff" font-size="10" font-weight="800" font-family="sans-serif" transform="rotate(-90 14, 550)">PR08 / PR09</text>
 
                 <!-- Carro Guincho com Panela Içada -->
-                <g id="s4-suspended-ladle" transform="translate(330, 8)">
-                  <rect x="-40" y="-2" width="80" height="42" fill="#0369a1" stroke="#38bdf8" stroke-width="2" rx="4" />
+                <g id="s4-suspended-ladle" transform="translate(14, 270)">
+                  <rect x="-28" y="-28" width="56" height="56" fill="#0369a1" stroke="#38bdf8" stroke-width="2" rx="6" />
                   
-                  <!-- Cabos de Aço -->
-                  <line x1="-20" y1="36" x2="-20" y2="65" stroke="#94a3b8" stroke-width="3" />
-                  <line x1="20" y1="36" x2="20" y2="65" stroke="#94a3b8" stroke-width="3" />
-                  
-                  <!-- Panela Içada -->
-                  <g transform="translate(0, 65)">
-                    <rect x="-32" y="0" width="64" height="60" fill="#334155" stroke="#cbd5e1" stroke-width="2" rx="6" />
+                  <!-- Panela Içada Vista de Cima -->
+                  <g transform="translate(0, 0)">
+                    <circle cx="0" cy="0" r="26" fill="#334155" stroke="#cbd5e1" stroke-width="2.5" />
                     <!-- Metal Líquido ou Interior Vazio -->
-                    <ellipse id="s4-liquid-steel" cx="0" cy="16" rx="26" ry="12" fill="#f97316" filter="drop-shadow(0 0 8px #f97316)" />
-                    <text x="0" y="42" fill="#f8fafc" font-size="10" font-weight="800" text-anchor="middle">PANELA</text>
+                    <circle id="s4-liquid-steel" cx="0" cy="0" r="18" fill="#f97316" filter="drop-shadow(0 0 10px #f97316)" />
+                    <text x="0" y="4" fill="#f8fafc" font-size="8" font-weight="800" text-anchor="middle">PANELA</text>
                   </g>
                 </g>
               </g>
@@ -913,7 +866,7 @@
           </div>
         </div>
 
-        <!-- COLUNA 3 (RIGHT) -->
+        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Painel de Cenários -->
         <div class="col-right">
           <div class="panel-header">
             <h3>📋 Matriz de Segurança</h3>
@@ -924,26 +877,12 @@
           <div class="notes-tab-bar">
             <button class="tab-item active" data-tab="default">Default</button>
             <div class="custom-tabs-container"></div>
-            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+            <button class="btn-add-tab" title="Adicionar Novo Cenário / Variação">➕</button>
           </div>
 
-          <!-- Form to Add New Note -->
-          <div class="note-form-card">
-            <div class="form-title">
-              <span>📝 Nova Nota / Cenário</span>
-              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
-            </div>
-            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
-            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
-            <div class="form-actions">
-              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
-              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
-            </div>
-          </div>
-
-          <!-- Dynamic Content Container -->
+          <!-- Dynamic Content Container (Panels) -->
           <div class="notes-content-container">
-            <div class="default-content">
+            <div class="panel-view default-panel">
               <div class="rule-card">
                 <div class="rule-title">🚨 Regra de Carga Suspensa (NR-11)</div>
                 <ul>
@@ -962,22 +901,100 @@
                   <li>Mesmo com panela vazia, a tara do equipamento ultrapassa dezenas de toneladas.</li>
                 </ul>
               </div>
-            </div>
-          </div>
 
-          <div class="safety-alert-footer">
-            <div class="alert-icon">⚠️</div>
-            <div class="alert-text">
-              <strong>Intertravamento de Segurança:</strong>
-              Bloqueio visual e confirmação de área limpa (Clear Zone) antes da autorização de tráfego de carga suspensa.
+              <div class="safety-alert-footer">
+                <div class="alert-icon">⚠️</div>
+                <div class="alert-text">
+                  <strong>Intertravamento de Segurança:</strong>
+                  Bloqueio visual e confirmação de área limpa (Clear Zone) antes da autorização de tráfego de carga suspensa.
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
       </div>
     </section>
+
   </main>
 
+  <!-- MODAL CENTRALIZADO: Criar Novo Cenário / Variação -->
+  <div id="scenario-modal-overlay" class="modal-overlay">
+    <div class="modal-card">
+      <header class="modal-header">
+        <h3>📝 Adicionar Novo Cenário / Variação</h3>
+        <button id="btn-modal-close" class="btn-close-modal" type="button">✕</button>
+      </header>
+
+      <form id="scenario-custom-form" class="modal-form-wrapper">
+        <main class="modal-body">
+          <!-- Campo Título -->
+          <div class="form-group">
+            <label for="modal-input-title">Título do Cenário / Variação *</label>
+            <textarea id="modal-input-title" rows="2" placeholder="Ex.: Variação com Chuva e Pista Molhada" required></textarea>
+          </div>
+
+          <!-- PARTE 1: Regra Operacional Aplicada -->
+          <div class="form-section-card">
+            <div class="section-title">🛡️ 1. Regra Operacional Aplicada</div>
+            
+            <div class="form-group">
+              <label for="modal-input-origin">Origem do Equipamento / Carro</label>
+              <textarea id="modal-input-origin" rows="4" placeholder="Ex.: Outro setor para ponto final na Ala Sul."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="modal-input-condition">Condição da Panela</label>
+              <textarea id="modal-input-condition" rows="4" placeholder="Ex.: Vazia (com ou sem tampa)."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="modal-input-evacuate">Quem Evacua (Frentes em Risco)</label>
+              <textarea id="modal-input-evacuate" rows="4" placeholder="Ex.: Apenas trabalhadores da Frente H3."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="modal-input-remain">Quem Permanece (Frentes Liberadas)</label>
+              <textarea id="modal-input-remain" rows="4" placeholder="Ex.: Frentes H1 e H2 continuam liberadas."></textarea>
+            </div>
+          </div>
+
+          <!-- PARTE 2: Justificativa Técnica -->
+          <div class="form-section-card">
+            <div class="section-title">📌 2. Justificativa Técnica</div>
+
+            <div class="form-group">
+              <label for="modal-input-justification">Justificativa Técnica (um item por linha)</label>
+              <textarea id="modal-input-justification" rows="4" placeholder="• O carro do Bate e Volta corre na lateral contígua a H3.&#10;• Não há risco térmico de projeção de aço líquido (panela vazia).&#10;• Risco restrito ao atropelamento e proximidade de carga mecânica na faixa lateral H3."></textarea>
+            </div>
+          </div>
+
+          <!-- PARTE 3: Aviso / Alerta de Segurança -->
+          <div class="form-section-card">
+            <div class="section-title">⚠️ 3. Aviso / Alerta de Segurança (Rodapé)</div>
+
+            <div class="form-group">
+              <label for="modal-input-alert">Mensagem de Alerta / Rádio Operacional</label>
+              <textarea id="modal-input-alert" rows="4" placeholder="Ex.: Atenção ao Rádio Operacional: Operador do carro emite sinal sonoro antes do deslocamento. H3 deve estar 100% livre."></textarea>
+            </div>
+          </div>
+        </main>
+
+        <footer class="modal-footer">
+          <button type="button" id="btn-modal-cancel" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" class="btn btn-primary">💾 Salvar e Criar Cenário</button>
+        </footer>
+      </form>
+    </div>
+  </div>
+
+  <!-- Módulos JavaScript -->
+  <script src="JS/navigation.js"></script>
+  <script src="JS/notes-system.js"></script>
+  <script src="JS/cenario1.js"></script>
+  <script src="JS/cenario2.js"></script>
+  <script src="JS/cenario3.js"></script>
+  <script src="JS/cenario4.js"></script>
   <script src="JS/app.js"></script>
 </body>
 </html>
