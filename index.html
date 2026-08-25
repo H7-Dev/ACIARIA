@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de Segurança Operacional - Aciaria (Área H0)</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="app-header">
+    <div class="header-brand">
+      <div class="icon-badge">⚡</div>
+      <h1>SEGURANÇA OPERACIONAL EM ACIARIA <span>| Simulação de Risco & Evacuação (Área H0)</span></h1>
+    </div>
+    <nav class="nav-scenarios">
+      <a href="#cenario-1" class="nav-btn active">1. Bate e Volta (Vazia)</a>
+      <a href="#cenario-2" class="nav-btn">2. Convertedor 2 (Cheia)</a>
+      <a href="#cenario-3" class="nav-btn">3. Ponte Vazia (Gancho H1)</a>
+      <a href="#cenario-4" class="nav-btn">4. Ponte com Carga (Total)</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- =========================================================================
+         CENÁRIO 1: Linha Bate e Volta (Ala Sul) - Panela Vazia
+         ========================================================================= -->
+    <section id="cenario-1" class="scenario-section">
+      <div class="scenario-layout">
+        
+        <!-- COLUNA 1 (LEFT): Controles e Variações -->
+        <div class="col-left">
+          <div class="tag-badge ground">Movimentação Terrestre (Piso)</div>
+          <h2 class="scenario-title">Cenário 1: Linha Bate e Volta</h2>
+          <p class="scenario-desc">
+            Transferência de panela <strong>vazia</strong> vindo de outra área da fábrica para o ponto final na Ala Sul.
+          </p>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Simulação de Movimento</span>
+            </div>
+            <div class="sim-player-bar">
+              <div class="sim-action-btns">
+                <button class="btn-icon btn-play-action btn-play" title="Executar Simulação" aria-label="Play">▶</button>
+                <button class="btn-icon btn-reset-action btn-reset" title="Reiniciar" aria-label="Reset">⏮</button>
+              </div>
+              <div class="sim-progress-track">
+                <div class="sim-progress-bar"></div>
+              </div>
+              <div class="sim-time-tag">0.0s</div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Tampa de Proteção</span>
+            </div>
+            <div class="segmented-control">
+              <button class="seg-btn btn-var active" data-var="no-lid">
+                <span class="seg-icon">⭕</span> S/ Tampa
+              </button>
+              <button class="seg-btn btn-var" data-var="lid">
+                <span class="seg-icon">🛡️</span> C/ Tampa
+              </button>
+            </div>
+          </div>
+
+          <div class="instruction-box">
+            <strong>Instrução ao Palestrante:</strong> Observe que por ser panela vazia na Ala Sul, apenas a frente <strong>H3</strong> entra no raio de interferência direta da linha férrea.
+          </div>
+        </div>
+
+        <!-- COLUNA 2 (CENTER): Palco de Animação 2D (Planta Baixa) -->
+        <div class="col-center">
+          <div class="stage-header">
+            <div class="live-alert-badge">
+              <div class="pulse-dot"></div>
+              <span class="alert-text-status">STANDBY: ÁREA EM OBRAS</span>
+            </div>
+          </div>
+
+          <div class="plant-stage">
+            <svg class="svg-plant" viewBox="0 0 700 575" preserveAspectRatio="xMidYMin meet">
+              <defs>
+                <!-- Hatch patterns for danger -->
+                <pattern id="hazardStripes" width="12" height="12" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+                  <line x1="0" y1="0" x2="0" y2="12" stroke="#ef4444" stroke-width="4" stroke-opacity="0.3" />
+                </pattern>
+                
+                <!-- Worker Icon Definition -->
+                <g id="worker-icon">
+                  <circle cx="0" cy="-6" r="6" fill="#fbbf24" stroke="#d97706" stroke-width="1.5" />
+                  <path d="M-9,8 C-9,1 9,1 9,8 Z" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1" />
+                </g>
+
+                <!-- CARRO DE TRANSFERÊNCIA COMPLETO (VISTA DE CIMA) -->
+                <!-- Carro Base -->
+                <g id="transfer-car-base">
+                  <!-- Truques / Rodas nos 4 cantos dos trilhos -->
+                  <rect x="-44" y="-45" width="8" height="22" fill="#0f172a" stroke="#64748b" stroke-width="1.5" rx="2" />
+                  <rect x="36" y="-45" width="8" height="22" fill="#0f172a" stroke="#64748b" stroke-width="1.5" rx="2" />
+                  <rect x="-44" y="23" width="8" height="22" fill="#0f172a" stroke="#64748b" stroke-width="1.5" rx="2" />
+                  <rect x="36" y="23" width="8" height="22" fill="#0f172a" stroke="#64748b" stroke-width="1.5" rx="2" />
+                  
+                  <!-- Chassi Principal Retangular -->
+                  <rect x="-40" y="-48" width="80" height="96" fill="#1e293b" stroke="#475569" stroke-width="2.5" rx="8" />
+                  <!-- Plataforma metálica interna -->
+                  <rect x="-35" y="-43" width="70" height="86" fill="#0f172a" stroke="#334155" stroke-width="1" rx="4" />
+                  
+                  <!-- Para-choques / Faixas zebradas de segurança -->
+                  <rect x="-35" y="-47" width="70" height="6" fill="#f59e0b" rx="2" />
+                  <rect x="-35" y="41" width="70" height="6" fill="#f59e0b" rx="2" />
+                </g>
+
+                <!-- Panela Vazia Vista de Cima -->
+                <g id="ladle-empty-view">
+                  <!-- Munhões laterais (olhais de içamento) -->
+                  <rect x="-38" y="-7" width="10" height="14" fill="#64748b" stroke="#cbd5e1" stroke-width="1.5" rx="2" />
+                  <rect x="28" y="-7" width="10" height="14" fill="#64748b" stroke="#cbd5e1" stroke-width="1.5" rx="2" />
+                  <!-- Casco externo de aço da panela -->
+                  <circle cx="0" cy="0" r="30" fill="#334155" stroke="#94a3b8" stroke-width="3" />
+                  <!-- Anel refratário da borda -->
+                  <circle cx="0" cy="0" r="24" fill="#1e293b" stroke="#64748b" stroke-width="2" />
+                  <!-- Interior da panela vazia -->
+                  <circle cx="0" cy="0" r="18" fill="#090d16" />
+                  <text x="0" y="4" fill="#94a3b8" font-size="9" font-weight="800" text-anchor="middle" font-family="sans-serif">VAZIA</text>
+                </g>
+
+                <!-- Panela Cheia de Aço Líquido Vista de Cima -->
+                <g id="ladle-full-view">
+                  <!-- Munhões laterais -->
+                  <rect x="-38" y="-7" width="10" height="14" fill="#64748b" stroke="#cbd5e1" stroke-width="1.5" rx="2" />
+                  <rect x="28" y="-7" width="10" height="14" fill="#64748b" stroke="#cbd5e1" stroke-width="1.5" rx="2" />
+                  <!-- Casco externo -->
+                  <circle cx="0" cy="0" r="30" fill="#475569" stroke="#ef4444" stroke-width="3" />
+                  <!-- Aço líquido incandescente -->
+                  <circle cx="0" cy="0" r="24" fill="#ea580c" stroke="#fbbf24" stroke-width="2" />
+                  <circle cx="0" cy="0" r="16" fill="#fbbf24" filter="drop-shadow(0 0 8px #f97316)" />
+                  <text x="0" y="4" fill="#7c2d12" font-size="9" font-weight="900" text-anchor="middle" font-family="sans-serif">CHEIA</text>
+                </g>
+
+                <!-- Tampa de Proteção da Panela -->
+                <g id="ladle-lid-view">
+                  <circle cx="0" cy="0" r="26" fill="#475569" stroke="#cbd5e1" stroke-width="2.5" />
+                  <!-- Pega central da tampa -->
+                  <rect x="-12" y="-4" width="24" height="8" fill="#1e293b" stroke="#cbd5e1" stroke-width="1.5" rx="2" />
+                  <text x="0" y="-8" fill="#f8fafc" font-size="8" font-weight="800" text-anchor="middle" font-family="sans-serif">TAMPA</text>
+                </g>
+              </defs>
+
+              <!-- Grid Background -->
+              <rect x="0" y="0" width="700" height="620" fill="#090d16" />
+
+              <!-- Convertedor 2 (Ala Norte) -->
+              <g id="converter-2-group" transform="translate(30, 20)">
+                <rect x="0" y="0" width="150" height="130" class="converter-box" rx="6" />
+                <rect x="15" y="15" width="120" height="100" fill="#2d3748" rx="4" stroke="#4a5568" />
+                <circle cx="75" cy="65" r="35" fill="#1a202c" stroke="#e53e3e" stroke-width="2" />
+                <text x="75" y="60" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">CONVERTEDOR</text>
+                <text x="75" y="78" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle" font-family="sans-serif">2</text>
+              </g>
+
+              <!-- Trilhos: Linha Carro 2 (Ala Norte) -->
+              <g transform="translate(30, 150)">
+                <rect x="25" y="0" width="100" height="450" class="rail-bed" />
+                <!-- Travessas -->
+                <line x1="25" y1="50" x2="125" y2="50" class="rail-sleepers" />
+                <line x1="25" y1="120" x2="125" y2="120" class="rail-sleepers" />
+                <line x1="25" y1="190" x2="125" y2="190" class="rail-sleepers" />
+                <line x1="25" y1="260" x2="125" y2="260" class="rail-sleepers" />
+                <line x1="25" y1="330" x2="125" y2="330" class="rail-sleepers" />
+                <line x1="25" y1="400" x2="125" y2="400" class="rail-sleepers" />
+                <!-- Linhas dos Trilhos -->
+                <line x1="40" y1="0" x2="40" y2="450" class="rail-line" />
+                <line x1="110" y1="0" x2="110" y2="450" class="rail-line" />
+                <text x="75" y="240" fill="#64748b" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 75 240)">LINHA CARRO 2 (TRILHOS)</text>
+              </g>
+
+              <!-- Trilhos: Linha Bate e Volta (Ala Sul) -->
+              <g transform="translate(480, 150)">
+                <rect x="20" y="0" width="100" height="450" class="rail-bed" />
+                <!-- Travessas -->
+                <line x1="20" y1="50" x2="120" y2="50" class="rail-sleepers" />
+                <line x1="20" y1="120" x2="120" y2="120" class="rail-sleepers" />
+                <line x1="20" y1="190" x2="120" y2="190" class="rail-sleepers" />
+                <line x1="20" y1="260" x2="120" y2="260" class="rail-sleepers" />
+                <line x1="20" y1="330" x2="120" y2="330" class="rail-sleepers" />
+                <line x1="20" y1="400" x2="120" y2="400" class="rail-sleepers" />
+                <!-- Linhas dos Trilhos -->
+                <line x1="35" y1="0" x2="35" y2="450" class="rail-line" />
+                <line x1="105" y1="0" x2="105" y2="450" class="rail-line" />
+                <text x="70" y="240" fill="#64748b" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 70 240)">LINHA BATE E VOLTA (TRILHOS)</text>
+              </g>
+
+              <!-- ÁREA H0 (Perímetro com Obras) -->
+              <g transform="translate(195, 150)">
+                <!-- Perímetro Global H0 -->
+                <rect x="0" y="0" width="270" height="390" class="zone-h0-perimeter h-zone-border" rx="10" />
+                <text x="135" y="410" fill="#94a3b8" font-size="13" font-weight="700" text-anchor="middle">ÁREA H0 (OBRAS)</text>
+
+                <!-- Zona H1 (Transversal Superior) -->
+                <rect id="s1-zone-h1" x="5" y="5" width="260" height="55" class="zone-rect" rx="4" />
+                <text x="135" y="38" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">H1</text>
+
+                <!-- Zona H2 (Lateral Esquerda) -->
+                <rect id="s1-zone-h2" x="5" y="65" width="55" height="90" class="zone-rect" rx="4" />
+                <text x="32" y="115" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">H2</text>
+
+                <!-- Zona H3 (Lateral Direita / Adjacente ao Bate e Volta) -->
+                <rect id="s1-zone-h3" x="205" y="65" width="60" height="320" class="zone-rect" rx="4" />
+                <text x="235" y="225" fill="#e2e8f0" font-size="15" font-weight="800" text-anchor="middle">H3</text>
+
+                <!-- Centro H0 (Miolo livre de circulação) -->
+                <rect x="65" y="65" width="135" height="320" fill="none" stroke="#334155" stroke-dasharray="4 4" />
+                <text x="132" y="225" fill="#334155" font-size="24" font-weight="800" text-anchor="middle">H0</text>
+
+                <!-- Ponto de Refúgio Seguro (Abaixo de H0) -->
+                <g transform="translate(25, 425)">
+                  <rect x="0" y="0" width="220" height="34" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 3" rx="6" />
+                  <text x="110" y="21" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">🛡️ PONTO DE REFÚGIO SEGURO</text>
+                </g>
+
+                <!-- TRABALHADORES (COM TRANSLAÇÃO INDIVIDUAL) -->
+                <!-- Trabalhadores H1 (2 operadores) -->
+                <g id="s1-w1" class="worker-group" style="transform: translate(110px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s1-w2" class="worker-group" style="transform: translate(160px, 30px);"><use href="#worker-icon" /></g>
+
+                <!-- Trabalhador H2 (1 operador) -->
+                <g id="s1-w3" class="worker-group" style="transform: translate(32px, 110px);"><use href="#worker-icon" /></g>
+
+                <!-- Trabalhadores H3 (3 operadores alinhados verticalmente no trabalho) -->
+                <g id="s1-w4" class="worker-group" style="transform: translate(235px, 140px);"><use href="#worker-icon" /></g>
+                <g id="s1-w5" class="worker-group" style="transform: translate(235px, 210px);"><use href="#worker-icon" /></g>
+                <g id="s1-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
+              </g>
+
+              <!-- CARRO DE TRANSFERÊNCIA: Linha Bate e Volta -->
+              <g id="s1-car" class="transfer-car" style="transform: translate(550px, 520px);">
+                <use href="#transfer-car-base" />
+                <use href="#ladle-empty-view" />
+                <use id="s1-ladle-lid" href="#ladle-lid-view" style="display: none;" />
+              </g>
+
+            </svg>
+          </div>
+
+          <!-- Bottom Wing Orientation Banners -->
+          <div class="stage-footer">
+            <div class="wing-banner north">
+              <span class="arrow">◄</span>
+              <div class="wing-info">
+                <div class="wing-title">ALA NORTE</div>
+                <div class="wing-sub">Convertedor 2 / Carro 2</div>
+              </div>
+            </div>
+            <div class="wing-banner south">
+              <div class="wing-info">
+                <div class="wing-title">ALA SUL</div>
+                <div class="wing-sub">Linha Bate e Volta</div>
+              </div>
+              <span class="arrow">►</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3 (RIGHT): Matriz de Segurança & Notas -->
+        <div class="col-right">
+          <div class="panel-header">
+            <h3>📋 Matriz de Segurança</h3>
+            <p>Regras operacionais e notas técnicas</p>
+          </div>
+
+          <!-- Dynamic Note Tabs Bar -->
+          <div class="notes-tab-bar">
+            <button class="tab-item active" data-tab="default">Default</button>
+            <div class="custom-tabs-container"></div>
+            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+          </div>
+
+          <!-- Form to Add New Note -->
+          <div class="note-form-card">
+            <div class="form-title">
+              <span>📝 Nova Nota / Cenário</span>
+              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
+            </div>
+            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
+            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
+            <div class="form-actions">
+              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
+              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Container -->
+          <div class="notes-content-container">
+            <div class="default-content">
+              <div class="rule-card">
+                <div class="rule-title">🛡️ Regra Operacional Aplicada</div>
+                <ul>
+                  <li><strong>Origem do Carro:</strong> Outro setor para ponto final na Ala Sul.</li>
+                  <li><strong>Condição da Panela:</strong> Vazia (com ou sem tampa).</li>
+                  <li class="highlight-danger"><strong>Quem Evacua:</strong> Apenas trabalhadores da <strong>Frente H3</strong>.</li>
+                  <li class="highlight-safe"><strong>Quem Permanece:</strong> Frentes <strong>H1 e H2</strong> continuam liberadas.</li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">📌 Justificativa Técnica</div>
+                <ul>
+                  <li>O carro do Bate e Volta corre na lateral contígua a H3.</li>
+                  <li>Não há risco térmico de projeção de aço líquido (panela vazia).</li>
+                  <li>Risco restrito ao atropelamento e proximidade de carga mecânica na faixa lateral H3.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="safety-alert-footer">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-text">
+              <strong>Atenção ao Rádio Operacional:</strong>
+              Operador do carro emite sinal sonoro antes do deslocamento. H3 deve estar 100% livre.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CENÁRIO 2: Linha Carro 2 / Convertedor 2 (Ala Norte) - Panela Cheia
+         ========================================================================= -->
+    <section id="cenario-2" class="scenario-section">
+      <div class="scenario-layout">
+        
+        <!-- COLUNA 1 (LEFT) -->
+        <div class="col-left">
+          <div class="tag-badge ground">Movimentação Terrestre (Piso)</div>
+          <h2 class="scenario-title">Cenário 2: Saída do Convertedor 2</h2>
+          <p class="scenario-desc">
+            Carro de transferência saindo do Convertedor 2 com panela <strong>cheia de aço líquido incandescente (~1650°C)</strong> na Ala Norte.
+          </p>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Simulação de Movimento</span>
+            </div>
+            <div class="sim-player-bar">
+              <div class="sim-action-btns">
+                <button class="btn-icon btn-play-action btn-play" title="Executar Simulação" aria-label="Play">▶</button>
+                <button class="btn-icon btn-reset-action btn-reset" title="Reiniciar" aria-label="Reset">⏮</button>
+              </div>
+              <div class="sim-progress-track">
+                <div class="sim-progress-bar"></div>
+              </div>
+              <div class="sim-time-tag">0.0s</div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Tampa de Proteção</span>
+            </div>
+            <div class="segmented-control">
+              <button class="seg-btn btn-var active" data-var="no-lid">
+                <span class="seg-icon">⭕</span> S/ Tampa
+              </button>
+              <button class="seg-btn btn-var" data-var="lid">
+                <span class="seg-icon">🛡️</span> C/ Tampa
+              </button>
+            </div>
+          </div>
+
+          <div class="instruction-box">
+            <strong>Instrução ao Palestrante:</strong> A presença de aço líquido cria risco extremo de radiação térmica, respingos e projeções. Evacuação <strong>total e obrigatória</strong> de todo o H0.
+          </div>
+        </div>
+
+        <!-- COLUNA 2 (CENTER) -->
+        <div class="col-center">
+          <div class="stage-header">
+            <div class="live-alert-badge">
+              <div class="pulse-dot"></div>
+              <span class="alert-text-status">STANDBY: ÁREA EM OBRAS</span>
+            </div>
+          </div>
+
+          <div class="plant-stage">
+            <svg class="svg-plant" viewBox="0 0 700 575" preserveAspectRatio="xMidYMin meet">
+              <!-- Grid Background -->
+              <rect x="0" y="0" width="700" height="620" fill="#090d16" />
+
+              <!-- Convertedor 2 (Ala Norte) -->
+              <g transform="translate(30, 20)">
+                <rect x="0" y="0" width="150" height="130" class="converter-box" rx="6" />
+                <rect x="15" y="15" width="120" height="100" fill="#2d3748" rx="4" stroke="#4a5568" />
+                <circle cx="75" cy="65" r="35" fill="#f97316" stroke="#b91c1c" stroke-width="3" filter="drop-shadow(0 0 10px #f97316)" />
+                <text x="75" y="60" fill="#fff" font-size="12" font-weight="700" text-anchor="middle" font-family="sans-serif">CONVERTEDOR</text>
+                <text x="75" y="78" fill="#ffe4e6" font-size="16" font-weight="800" text-anchor="middle" font-family="sans-serif">2</text>
+              </g>
+
+              <!-- Trilhos: Linha Carro 2 -->
+              <g transform="translate(30, 150)">
+                <rect x="25" y="0" width="100" height="450" class="rail-bed" />
+                <line x1="25" y1="50" x2="125" y2="50" class="rail-sleepers" />
+                <line x1="25" y1="120" x2="125" y2="120" class="rail-sleepers" />
+                <line x1="25" y1="190" x2="125" y2="190" class="rail-sleepers" />
+                <line x1="25" y1="260" x2="125" y2="260" class="rail-sleepers" />
+                <line x1="25" y1="330" x2="125" y2="330" class="rail-sleepers" />
+                <line x1="25" y1="400" x2="125" y2="400" class="rail-sleepers" />
+                <line x1="40" y1="0" x2="40" y2="450" class="rail-line" />
+                <line x1="110" y1="0" x2="110" y2="450" class="rail-line" />
+                <text x="75" y="240" fill="#64748b" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 75 240)">LINHA CARRO 2 (TRILHOS)</text>
+              </g>
+
+              <!-- Trilhos: Linha Bate e Volta -->
+              <g transform="translate(480, 150)">
+                <rect x="20" y="0" width="100" height="450" class="rail-bed" />
+                <line x1="35" y1="0" x2="35" y2="450" class="rail-line" />
+                <line x1="105" y1="0" x2="105" y2="450" class="rail-line" />
+                <text x="70" y="240" fill="#64748b" font-size="11" font-weight="700" text-anchor="middle" transform="rotate(-90 70 240)">LINHA BATE E VOLTA</text>
+              </g>
+
+              <!-- ÁREA H0 -->
+              <g transform="translate(195, 150)">
+                <rect x="0" y="0" width="270" height="390" class="zone-h0-perimeter h-zone-border" rx="10" />
+                <text x="135" y="410" fill="#94a3b8" font-size="13" font-weight="700" text-anchor="middle">ÁREA H0 (OBRAS)</text>
+
+                <!-- Zona H1 -->
+                <rect id="s2-zone-h1" x="5" y="5" width="260" height="55" class="zone-rect" rx="4" />
+                <text x="135" y="38" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">H1</text>
+
+                <!-- Zona H2 -->
+                <rect id="s2-zone-h2" x="5" y="65" width="55" height="90" class="zone-rect" rx="4" />
+                <text x="32" y="115" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">H2</text>
+
+                <!-- Zona H3 -->
+                <rect id="s2-zone-h3" x="205" y="65" width="60" height="320" class="zone-rect" rx="4" />
+                <text x="235" y="225" fill="#e2e8f0" font-size="15" font-weight="800" text-anchor="middle">H3</text>
+
+                <!-- Centro H0 -->
+                <rect x="65" y="65" width="135" height="320" fill="none" stroke="#334155" stroke-dasharray="4 4" />
+                <text x="132" y="225" fill="#334155" font-size="24" font-weight="800" text-anchor="middle">H0</text>
+
+                <!-- Ponto de Refúgio Seguro -->
+                <g transform="translate(25, 425)">
+                  <rect x="0" y="0" width="220" height="34" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 3" rx="6" />
+                  <text x="110" y="21" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">🛡️ PONTO DE REFÚGIO SEGURO</text>
+                </g>
+
+                <!-- Trabalhadores H1, H2, H3 -->
+                <g id="s2-w1" class="worker-group" style="transform: translate(110px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s2-w2" class="worker-group" style="transform: translate(160px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s2-w3" class="worker-group" style="transform: translate(32px, 110px);"><use href="#worker-icon" /></g>
+                <g id="s2-w4" class="worker-group" style="transform: translate(235px, 140px);"><use href="#worker-icon" /></g>
+                <g id="s2-w5" class="worker-group" style="transform: translate(235px, 210px);"><use href="#worker-icon" /></g>
+                <g id="s2-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
+              </g>
+
+              <!-- CARRO 2 (Panela Cheia Incandescente Vista de Cima) -->
+              <g id="s2-car" class="transfer-car" style="transform: translate(105px, 90px);">
+                <use href="#transfer-car-base" />
+                <use href="#ladle-full-view" />
+                <use id="s2-ladle-lid" href="#ladle-lid-view" style="display: none;" />
+              </g>
+
+            </svg>
+          </div>
+
+          <!-- Bottom Wing Orientation Banners -->
+          <div class="stage-footer">
+            <div class="wing-banner north">
+              <span class="arrow">◄</span>
+              <div class="wing-info">
+                <div class="wing-title">ALA NORTE</div>
+                <div class="wing-sub">Convertedor 2 / Carro 2</div>
+              </div>
+            </div>
+            <div class="wing-banner south">
+              <div class="wing-info">
+                <div class="wing-title">ALA SUL</div>
+                <div class="wing-sub">Linha Bate e Volta</div>
+              </div>
+              <span class="arrow">►</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3 (RIGHT) -->
+        <div class="col-right">
+          <div class="panel-header">
+            <h3>📋 Matriz de Segurança</h3>
+            <p>Regras operacionais e notas técnicas</p>
+          </div>
+
+          <!-- Dynamic Note Tabs Bar -->
+          <div class="notes-tab-bar">
+            <button class="tab-item active" data-tab="default">Default</button>
+            <div class="custom-tabs-container"></div>
+            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+          </div>
+
+          <!-- Form to Add New Note -->
+          <div class="note-form-card">
+            <div class="form-title">
+              <span>📝 Nova Nota / Cenário</span>
+              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
+            </div>
+            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
+            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
+            <div class="form-actions">
+              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
+              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Container -->
+          <div class="notes-content-container">
+            <div class="default-content">
+              <div class="rule-card">
+                <div class="rule-title">🚨 Protocolo Crítico de Segurança</div>
+                <ul>
+                  <li><strong>Origem do Carro:</strong> Saída do Convertedor 2 (Ala Norte).</li>
+                  <li><strong>Condição da Panela:</strong> <strong>SEMPRE CHEIA</strong> (~150 a 300t de metal líquido).</li>
+                  <li class="highlight-danger"><strong>Evacuação:</strong> <strong>TOTAL DO H0</strong> (H1 + H2 + H3).</li>
+                  <li class="highlight-danger"><strong>Nenhum trabalhador</strong> pode permanecer no perímetro H0.</li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">📌 Riscos Envolvidos</div>
+                <ul>
+                  <li>Projeção violenta de escória/metal por contato com umidade.</li>
+                  <li>Radiação de calor extremo afetando todas as frentes adjacentes.</li>
+                  <li>Com tampa ou sem tampa, a regra é <strong>evacuação total incondicional</strong>.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="safety-alert-footer">
+            <div class="alert-icon">🔥</div>
+            <div class="alert-text">
+              <strong>Alarme Sonoro Contínuo:</strong>
+              Acionamento de sirene da Aciaria antes da abertura das portas do convertedor e movimentação do carro.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CENÁRIO 3: Pontes Rolantes PR08/PR09 (Aéreo) - Ponte Vazia (Gancho H1)
+         ========================================================================= -->
+    <section id="cenario-3" class="scenario-section">
+      <div class="scenario-layout">
+        
+        <!-- COLUNA 1 (LEFT) -->
+        <div class="col-left">
+          <div class="tag-badge crane">Movimentação Aérea (Ponte Rolante)</div>
+          <h2 class="scenario-title">Cenário 3: Ponte Vazia em Trânsito</h2>
+          <p class="scenario-desc">
+            Ponte rolante <strong>PR08 ou PR09 sem carga</strong> transitando entre as Alas Norte e Sul. O gancho principal é recolhido e jogado ao máximo na direção Norte (Convertedor 2).
+          </p>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Simulação de Movimento</span>
+            </div>
+            <div class="sim-player-bar">
+              <div class="sim-action-btns">
+                <button class="btn-icon btn-play-action btn-play" title="Executar Simulação" aria-label="Play">▶</button>
+                <button class="btn-icon btn-reset-action btn-reset" title="Reiniciar" aria-label="Reset">⏮</button>
+              </div>
+              <div class="sim-progress-track">
+                <div class="sim-progress-bar"></div>
+              </div>
+              <div class="sim-time-tag">0.0s</div>
+            </div>
+          </div>
+
+          <div class="instruction-box">
+            <strong>Instrução ao Palestrante:</strong> Como o gancho principal atinge seu limite físico máximo exatamente sobre <strong>H1</strong>, apenas as frentes <strong>H1 e H2</strong> devem evacuar. <strong>H3</strong> pode prosseguir seus trabalhos em segurança.
+          </div>
+        </div>
+
+        <!-- COLUNA 2 (CENTER) -->
+        <div class="col-center">
+          <div class="stage-header">
+            <div class="live-alert-badge">
+              <div class="pulse-dot"></div>
+              <span class="alert-text-status">STANDBY: PONTE ESTACIONADA</span>
+            </div>
+          </div>
+
+          <div class="plant-stage">
+            <svg class="svg-plant" viewBox="0 0 700 575" preserveAspectRatio="xMidYMin meet">
+              <rect x="0" y="0" width="700" height="620" fill="#090d16" />
+
+              <!-- Convertedor 2 -->
+              <g transform="translate(30, 20)">
+                <rect x="0" y="0" width="150" height="130" class="converter-box" rx="6" />
+                <rect x="15" y="15" width="120" height="100" fill="#2d3748" rx="4" />
+                <circle cx="75" cy="65" r="35" fill="#1a202c" stroke="#e53e3e" stroke-width="2" />
+                <text x="75" y="60" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">CONVERTEDOR</text>
+                <text x="75" y="78" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle">2</text>
+              </g>
+
+              <!-- Trilhos das Pontes (Vigas de Rolamento Laterais) -->
+              <line x1="15" y1="0" x2="15" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <line x1="685" y1="0" x2="685" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+
+              <!-- ÁREA H0 -->
+              <g transform="translate(195, 150)">
+                <rect x="0" y="0" width="270" height="390" class="zone-h0-perimeter h-zone-border" rx="10" />
+                <text x="135" y="410" fill="#94a3b8" font-size="13" font-weight="700" text-anchor="middle">ÁREA H0 (OBRAS)</text>
+
+                <!-- Zona H1 -->
+                <rect id="s3-zone-h1" x="5" y="5" width="260" height="55" class="zone-rect" rx="4" />
+                <text x="135" y="38" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">H1 (LIMITE GANCHO)</text>
+
+                <!-- Zona H2 -->
+                <rect id="s3-zone-h2" x="5" y="65" width="55" height="90" class="zone-rect" rx="4" />
+                <text x="32" y="115" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">H2</text>
+
+                <!-- Zona H3 -->
+                <rect id="s3-zone-h3" x="205" y="65" width="60" height="320" class="zone-rect" rx="4" />
+                <text x="235" y="225" fill="#e2e8f0" font-size="15" font-weight="800" text-anchor="middle">H3</text>
+
+                <!-- Centro H0 -->
+                <rect x="65" y="65" width="135" height="320" fill="none" stroke="#334155" stroke-dasharray="4 4" />
+                <text x="132" y="225" fill="#334155" font-size="24" font-weight="800" text-anchor="middle">H0</text>
+
+                <!-- Ponto de Refúgio Seguro -->
+                <g transform="translate(25, 425)">
+                  <rect x="0" y="0" width="220" height="34" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 3" rx="6" />
+                  <text x="110" y="21" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">🛡️ PONTO DE REFÚGIO SEGURO</text>
+                </g>
+
+                <!-- Trabalhadores H1, H2, H3 -->
+                <g id="s3-w1" class="worker-group" style="transform: translate(110px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s3-w2" class="worker-group" style="transform: translate(160px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s3-w3" class="worker-group" style="transform: translate(32px, 110px);"><use href="#worker-icon" /></g>
+                <g id="s3-w4" class="worker-group" style="transform: translate(235px, 140px);"><use href="#worker-icon" /></g>
+                <g id="s3-w5" class="worker-group" style="transform: translate(235px, 210px);"><use href="#worker-icon" /></g>
+                <g id="s3-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
+              </g>
+
+              <!-- PONTE ROLANTE (PR08/PR09) - VAZIA -->
+              <g id="s3-crane" transform="translate(0, 40)">
+                <!-- Vigas Principais da Ponte -->
+                <rect x="15" y="0" width="670" height="18" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <rect x="15" y="26" width="670" height="18" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <text x="590" y="14" fill="#fff" font-size="11" font-weight="800" font-family="sans-serif">PR08 / PR09</text>
+
+                <!-- Carro Guincho / Trolley Móvel -->
+                <g id="s3-crane-trolley" transform="translate(350, 6)">
+                  <rect x="-30" y="-2" width="60" height="36" class="crane-trolley" rx="4" />
+                  <!-- Gancho Principal -->
+                  <circle cx="0" cy="16" r="10" class="crane-hook" />
+                  <path d="M-4,16 L4,16 L0,26 Z" fill="#b45309" />
+                  <text x="0" y="-6" fill="#0369a1" font-size="8" font-weight="800" text-anchor="middle">GANCHO</text>
+                </g>
+              </g>
+
+            </svg>
+          </div>
+
+          <!-- Bottom Wing Orientation Banners -->
+          <div class="stage-footer">
+            <div class="wing-banner north">
+              <span class="arrow">◄</span>
+              <div class="wing-info">
+                <div class="wing-title">ALA NORTE</div>
+                <div class="wing-sub">Convertedor 2 / Carro 2</div>
+              </div>
+            </div>
+            <div class="wing-banner south">
+              <div class="wing-info">
+                <div class="wing-title">ALA SUL</div>
+                <div class="wing-sub">Linha Bate e Volta</div>
+              </div>
+              <span class="arrow">►</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3 (RIGHT) -->
+        <div class="col-right">
+          <div class="panel-header">
+            <h3>📋 Matriz de Segurança</h3>
+            <p>Regras operacionais e notas técnicas</p>
+          </div>
+
+          <!-- Dynamic Note Tabs Bar -->
+          <div class="notes-tab-bar">
+            <button class="tab-item active" data-tab="default">Default</button>
+            <div class="custom-tabs-container"></div>
+            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+          </div>
+
+          <!-- Form to Add New Note -->
+          <div class="note-form-card">
+            <div class="form-title">
+              <span>📝 Nova Nota / Cenário</span>
+              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
+            </div>
+            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
+            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
+            <div class="form-actions">
+              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
+              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Container -->
+          <div class="notes-content-container">
+            <div class="default-content">
+              <div class="rule-card">
+                <div class="rule-title">🛡️ Regra da Ponte Rolante Vazia</div>
+                <ul>
+                  <li><strong>Estado:</strong> Ponte vazia em trânsito transversal.</li>
+                  <li><strong>Posicionamento do Gancho:</strong> Deslocado ao limite Norte (direção Convertedor 2).</li>
+                  <li class="highlight-danger"><strong>Quem Evacua:</strong> Frentes <strong>H1 e H2</strong>.</li>
+                  <li class="highlight-safe"><strong>Quem Permanece:</strong> Frente <strong>H3</strong> continua liberada.</li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">📌 Limite Físico de Alcance</div>
+                <ul>
+                  <li>O batente/limite mecânico do trole com gancho posicionado ao extremo Norte fica exatamente sobre o eixo superior de <strong>H1</strong>.</li>
+                  <li>Por proximidade de raio e zona de influência lateral, <strong>H2</strong> também evacua preventivamente.</li>
+                  <li>A frente <strong>H3</strong> fica fora do cone de perigo do gancho recolhido.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="safety-alert-footer">
+            <div class="alert-icon">🏗️</div>
+            <div class="alert-text">
+              <strong>Checklist de Manobra Aérea:</strong>
+              Operador da ponte confirma alinhamento do gancho ao extremo Norte antes de liberar o cruzamento sobre H0.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- =========================================================================
+         CENÁRIO 4: Pontes Rolantes PR08/PR09 (Aéreo) - Com Carga (Cheia/Vazia)
+         ========================================================================= -->
+    <section id="cenario-4" class="scenario-section">
+      <div class="scenario-layout">
+        
+        <!-- COLUNA 1 (LEFT) -->
+        <div class="col-left">
+          <div class="tag-badge crane">Movimentação Aérea (Ponte Rolante)</div>
+          <h2 class="scenario-title">Cenário 4: Ponte Rolante com Carga</h2>
+          <p class="scenario-desc">
+            Ponte rolante <strong>PR08 ou PR09 transportando panela suspensa (cheia ou vazia)</strong> cruzando o espaço aéreo de H0 entre a Ala Norte e a Ala Sul.
+          </p>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Simulação de Movimento</span>
+            </div>
+            <div class="sim-player-bar">
+              <div class="sim-action-btns">
+                <button class="btn-icon btn-play-action btn-play" title="Executar Simulação" aria-label="Play">▶</button>
+                <button class="btn-icon btn-reset-action btn-reset" title="Reiniciar" aria-label="Reset">⏮</button>
+              </div>
+              <div class="sim-progress-track">
+                <div class="sim-progress-bar"></div>
+              </div>
+              <div class="sim-time-tag">0.0s</div>
+            </div>
+          </div>
+
+          <div class="control-group">
+            <div class="group-title">
+              <span>Estado da Carga Içada</span>
+            </div>
+            <div class="segmented-control">
+              <button class="seg-btn btn-var active" data-var="full">
+                <span class="seg-icon">🔥</span> Panela Cheia
+              </button>
+              <button class="seg-btn btn-var" data-var="empty">
+                <span class="seg-icon">⚪</span> Panela Vazia
+              </button>
+            </div>
+          </div>
+
+          <div class="instruction-box">
+            <strong>Instrução ao Palestrante:</strong> Conforme NR-11 e procedimentos de içamento siderúrgico, é <strong>estritamente proibida</strong> a presença de qualquer trabalhador sob a projeção de carga suspensa. Evacuação total do H0.
+          </div>
+        </div>
+
+        <!-- COLUNA 2 (CENTER) -->
+        <div class="col-center">
+          <div class="stage-header">
+            <div class="live-alert-badge">
+              <div class="pulse-dot"></div>
+              <span class="alert-text-status">STANDBY: PONTE ESTACIONADA</span>
+            </div>
+          </div>
+
+          <div class="plant-stage">
+            <svg class="svg-plant" viewBox="0 0 700 575" preserveAspectRatio="xMidYMin meet">
+              <rect x="0" y="0" width="700" height="620" fill="#090d16" />
+
+              <!-- Convertedor 2 -->
+              <g transform="translate(30, 20)">
+                <rect x="0" y="0" width="150" height="130" class="converter-box" rx="6" />
+                <rect x="15" y="15" width="120" height="100" fill="#2d3748" rx="4" />
+                <circle cx="75" cy="65" r="35" fill="#1a202c" stroke="#e53e3e" stroke-width="2" />
+                <text x="75" y="60" fill="#f8fafc" font-size="12" font-weight="700" text-anchor="middle">CONVERTEDOR</text>
+                <text x="75" y="78" fill="#f87171" font-size="16" font-weight="800" text-anchor="middle">2</text>
+              </g>
+
+              <!-- Trilhos das Pontes -->
+              <line x1="15" y1="0" x2="15" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+              <line x1="685" y1="0" x2="685" y2="620" stroke="#0369a1" stroke-width="4" stroke-dasharray="10 5" />
+
+              <!-- ÁREA H0 -->
+              <g transform="translate(195, 150)">
+                <rect x="0" y="0" width="270" height="390" class="zone-h0-perimeter h-zone-border" rx="10" />
+                <text x="135" y="410" fill="#94a3b8" font-size="13" font-weight="700" text-anchor="middle">ÁREA H0 (OBRAS)</text>
+
+                <!-- Zona H1 -->
+                <rect id="s4-zone-h1" x="5" y="5" width="260" height="55" class="zone-rect" rx="4" />
+                <text x="135" y="38" fill="#e2e8f0" font-size="14" font-weight="700" text-anchor="middle">H1</text>
+
+                <!-- Zona H2 -->
+                <rect id="s4-zone-h2" x="5" y="65" width="55" height="90" class="zone-rect" rx="4" />
+                <text x="32" y="115" fill="#e2e8f0" font-size="13" font-weight="700" text-anchor="middle">H2</text>
+
+                <!-- Zona H3 -->
+                <rect id="s4-zone-h3" x="205" y="65" width="60" height="320" class="zone-rect" rx="4" />
+                <text x="235" y="225" fill="#e2e8f0" font-size="15" font-weight="800" text-anchor="middle">H3</text>
+
+                <!-- Centro H0 -->
+                <rect x="65" y="65" width="135" height="320" fill="none" stroke="#334155" stroke-dasharray="4 4" />
+                <text x="132" y="225" fill="#334155" font-size="24" font-weight="800" text-anchor="middle">H0</text>
+
+                <!-- Ponto de Refúgio Seguro -->
+                <g transform="translate(25, 425)">
+                  <rect x="0" y="0" width="220" height="34" fill="rgba(16, 185, 129, 0.12)" stroke="#10b981" stroke-width="1.5" stroke-dasharray="4 3" rx="6" />
+                  <text x="110" y="21" fill="#10b981" font-size="11" font-weight="700" text-anchor="middle">🛡️ PONTO DE REFÚGIO SEGURO</text>
+                </g>
+
+                <!-- Trabalhadores H1, H2, H3 -->
+                <g id="s4-w1" class="worker-group" style="transform: translate(110px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s4-w2" class="worker-group" style="transform: translate(160px, 30px);"><use href="#worker-icon" /></g>
+                <g id="s4-w3" class="worker-group" style="transform: translate(32px, 110px);"><use href="#worker-icon" /></g>
+                <g id="s4-w4" class="worker-group" style="transform: translate(235px, 140px);"><use href="#worker-icon" /></g>
+                <g id="s4-w5" class="worker-group" style="transform: translate(235px, 210px);"><use href="#worker-icon" /></g>
+                <g id="s4-w6" class="worker-group" style="transform: translate(235px, 280px);"><use href="#worker-icon" /></g>
+              </g>
+
+              <!-- PONTE ROLANTE (PR08/PR09) COM PANELA SUSPENSA -->
+              <g id="s4-crane" transform="translate(0, 30)">
+                <!-- Vigas da Ponte -->
+                <rect x="15" y="0" width="670" height="20" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <rect x="15" y="30" width="670" height="20" fill="#0284c7" stroke="#38bdf8" stroke-width="2" rx="3" />
+                <text x="590" y="15" fill="#fff" font-size="11" font-weight="800" font-family="sans-serif">PR08 / PR09</text>
+
+                <!-- Carro Guincho com Panela Içada -->
+                <g id="s4-suspended-ladle" transform="translate(330, 8)">
+                  <rect x="-40" y="-2" width="80" height="42" fill="#0369a1" stroke="#38bdf8" stroke-width="2" rx="4" />
+                  
+                  <!-- Cabos de Aço -->
+                  <line x1="-20" y1="36" x2="-20" y2="65" stroke="#94a3b8" stroke-width="3" />
+                  <line x1="20" y1="36" x2="20" y2="65" stroke="#94a3b8" stroke-width="3" />
+                  
+                  <!-- Panela Içada -->
+                  <g transform="translate(0, 65)">
+                    <rect x="-32" y="0" width="64" height="60" fill="#334155" stroke="#cbd5e1" stroke-width="2" rx="6" />
+                    <!-- Metal Líquido ou Interior Vazio -->
+                    <ellipse id="s4-liquid-steel" cx="0" cy="16" rx="26" ry="12" fill="#f97316" filter="drop-shadow(0 0 8px #f97316)" />
+                    <text x="0" y="42" fill="#f8fafc" font-size="10" font-weight="800" text-anchor="middle">PANELA</text>
+                  </g>
+                </g>
+              </g>
+
+            </svg>
+          </div>
+
+          <!-- Bottom Wing Orientation Banners -->
+          <div class="stage-footer">
+            <div class="wing-banner north">
+              <span class="arrow">◄</span>
+              <div class="wing-info">
+                <div class="wing-title">ALA NORTE</div>
+                <div class="wing-sub">Convertedor 2 / Carro 2</div>
+              </div>
+            </div>
+            <div class="wing-banner south">
+              <div class="wing-info">
+                <div class="wing-title">ALA SUL</div>
+                <div class="wing-sub">Linha Bate e Volta</div>
+              </div>
+              <span class="arrow">►</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- COLUNA 3 (RIGHT) -->
+        <div class="col-right">
+          <div class="panel-header">
+            <h3>📋 Matriz de Segurança</h3>
+            <p>Regras operacionais e notas técnicas</p>
+          </div>
+
+          <!-- Dynamic Note Tabs Bar -->
+          <div class="notes-tab-bar">
+            <button class="tab-item active" data-tab="default">Default</button>
+            <div class="custom-tabs-container"></div>
+            <button class="btn-add-tab" title="Adicionar Nova Nota / Cenário">➕</button>
+          </div>
+
+          <!-- Form to Add New Note -->
+          <div class="note-form-card">
+            <div class="form-title">
+              <span>📝 Nova Nota / Cenário</span>
+              <button class="btn-close-form" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:0.9rem;">✕</button>
+            </div>
+            <input type="text" class="input-note-title" placeholder="Título (ex.: Variação Operacional)" />
+            <textarea class="input-note-desc" placeholder="Descreva a regra de segurança, quem evacua ou observações..."></textarea>
+            <div class="form-actions">
+              <button class="btn btn-secondary btn-cancel-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Cancelar</button>
+              <button class="btn btn-primary btn-save-note" style="padding:0.3rem 0.6rem;font-size:0.75rem;">Salvar Nota</button>
+            </div>
+          </div>
+
+          <!-- Dynamic Content Container -->
+          <div class="notes-content-container">
+            <div class="default-content">
+              <div class="rule-card">
+                <div class="rule-title">🚨 Regra de Carga Suspensa (NR-11)</div>
+                <ul>
+                  <li><strong>Carga Içada:</strong> Panela de Aço (Cheia ou Vazia).</li>
+                  <li><strong>Trajetória:</strong> Voo aéreo cruzando o vão de H0.</li>
+                  <li class="highlight-danger"><strong>Evacuação:</strong> <strong>TOTAL DO H0</strong> (H1 + H2 + H3).</li>
+                  <li class="highlight-danger"><strong>Tolerância Zero:</strong> Nenhuma pessoa sob o cone de içamento.</li>
+                </ul>
+              </div>
+
+              <div class="rule-card">
+                <div class="rule-title">📌 Justificativa Técnica</div>
+                <ul>
+                  <li>Risco crítico de rompimento mecânico de laço/cabo de aço.</li>
+                  <li>Risco de vazamento catastrófico de aço líquido pelo fundo/tampa.</li>
+                  <li>Mesmo com panela vazia, a tara do equipamento ultrapassa dezenas de toneladas.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="safety-alert-footer">
+            <div class="alert-icon">⚠️</div>
+            <div class="alert-text">
+              <strong>Intertravamento de Segurança:</strong>
+              Bloqueio visual e confirmação de área limpa (Clear Zone) antes da autorização de tráfego de carga suspensa.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script src="JS/app.js"></script>
+</body>
+</html>
